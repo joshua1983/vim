@@ -1,8 +1,27 @@
 set relativenumber
 set cursorline
 call plug#begin('~/.vim/plugged')
+Plug 'rlofc/vorg'
+Plug 'godlygeek/tabular'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'vim-scripts/AutoComplPop'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tsserver'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'https://github.com/leafgarland/typescript-vim'
+Plug 'https://github.com/Quramy/vim-js-pretty-template'
+Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'gko/vim-coloresque'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'lilydjwg/colorizer'
 call plug#end()
 set guifont=DejaVu\ Sans:s12
 set tabstop=4
@@ -27,27 +46,16 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
+let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
+
+" Cargar fuente Powerline y símbolos (ver nota)
+let g:airline_powerline_fonts = 1
+
+set noshowmode  " No mostrar el modo actual (ya lo muestra la barra de estado)
+
 "otros plugins
 set rtp+=/usr/local/opt/fzf
-call plug#begin('~/.vim/plugged')
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'vim-scripts/AutoComplPop'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim'
-Plug 'scrooloose/nerdtree'
-Plug 'https://github.com/leafgarland/typescript-vim'
-Plug 'https://github.com/Quramy/vim-js-pretty-template'
-Plug 'https://github.com/pangloss/vim-javascript'
-Plug 'https://github.com/Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'gko/vim-coloresque'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'lilydjwg/colorizer'
-call plug#end()
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -66,7 +74,7 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 set tabstop=4
 " Open files in horizontal split
 nnoremap <silent> <Leader>s :call fzf#run({'down': '40%','sink': 'botright split' })<CR>
-nnoremap <silent> <C-p> :FZF .<CR>
+nnoremap <silent> <C-p> :GFiles .<CR>
 " open terminal
 set splitright
 set splitbelow
@@ -229,3 +237,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+let g:coc_global_extensions = [ 'coc-tsserver' ]
+
+nnoremap <silent> <C-l> :bprevious<cr>
+nnoremap <silent> <C-i> :bnext<cr>
