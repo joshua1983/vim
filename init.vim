@@ -5,6 +5,8 @@ Plug 'rlofc/vorg'
 Plug 'godlygeek/tabular'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'vim-scripts/AutoComplPop'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -52,6 +54,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del 
 " Cargar fuente Powerline y símbolos (ver nota)
 let g:airline_powerline_fonts = 1
 
+" diseño ventana de git checkout
 set noshowmode  " No mostrar el modo actual (ya lo muestra la barra de estado)
 
 "otros plugins
@@ -65,12 +68,13 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-colorscheme slate
+colorscheme gruvbox
+set background=dark
 syntax on
 set number
 highlight Normal ctermbg=None
 highlight LineNr ctermfg=DarkGrey
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <expr> <C-tab> emmet#expandAbbrIntelligent("\<tab>")
 set tabstop=4
 " Open files in horizontal split
 nnoremap <silent> <Leader>s :call fzf#run({'down': '40%','sink': 'botright split' })<CR>
@@ -242,3 +246,19 @@ let g:coc_global_extensions = [ 'coc-tsserver' ]
 
 nnoremap <silent> <C-l> :bprevious<cr>
 nnoremap <silent> <C-i> :bnext<cr>
+
+" Remap para git
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+map <F8> :FZF <CR>
+map <F9> :NERDTree <CR>
+map <F7> :bNext <CR>
