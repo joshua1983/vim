@@ -24,6 +24,7 @@ Plug 'airblade/vim-rooter'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'lilydjwg/colorizer'
+Plug 'jceb/vim-orgmode'
 call plug#end()
 set guifont=DejaVu\ Sans:s12
 set tabstop=4
@@ -74,7 +75,7 @@ syntax on
 set number
 highlight Normal ctermbg=None
 highlight LineNr ctermfg=DarkGrey
-imap <expr> <C-tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <expr> <F3> emmet#expandAbbrIntelligent("\<tab>")
 set tabstop=4
 " Open files in horizontal split
 nnoremap <silent> <Leader>s :call fzf#run({'down': '40%','sink': 'botright split' })<CR>
@@ -262,3 +263,5 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 map <F8> :FZF <CR>
 map <F9> :NERDTree <CR>
 map <F7> :bNext <CR>
+map <F4> :bd <CR>
+
