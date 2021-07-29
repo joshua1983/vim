@@ -1,3 +1,4 @@
+let mapleader=","
 set relativenumber
 set cursorline
 call plug#begin('~/.vim/plugged')
@@ -243,7 +244,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', ]
 
 nnoremap <silent> <C-l> :bprevious<cr>
 nnoremap <silent> <C-i> :bnext<cr>
@@ -262,6 +263,13 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 map <F8> :FZF <CR>
 map <F9> :NERDTree <CR>
-map <F7> :bNext <CR>
 map <F4> :bd <CR>
 
+if system('uname -s') == "Darwin\n"
+	set clipboard=unnamed "OSX
+else
+	set clipboard=unnamedplus "Linux
+endif
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
